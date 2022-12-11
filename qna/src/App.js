@@ -1,17 +1,125 @@
 import './App.css';
+import React, { useRef, useState } from 'react';
 
 function App() {
+
+  const inputQ = useRef(null);
+  const inputC = useRef(null);
+
+  const [question, setQuestion] = useState(null);
+  const [context, setContext] = useState(null);
+  const [post, setPost] = useState(false);
+  const [answer, setAnswer] = useState(null);
+
+  function Header() {
+    return (
+      <div className='bar-60-up'>
+        <div className='row'>
+          <p className='title'>Kelompok 5</p>
+          <div className='button-menu'>
+            <button className='header-menu'>Button1</button>
+            <button className='header-menu'>Button2</button>
+            <button className='header-menu'>Button3</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  function DescJudul(){
+    return (
+      <p className='desc'>
+        Deskripsi judul ditulis disini...
+      </p>
+    );
+  }
+
+  function DescContent(){
+    return (
+      <p className='desc'>
+        Deskripsi content ditulis disini...
+      </p>
+    );
+  }
+
+  function Print() {
+    return(
+      <div className='content'>
+        <div className='row'>
+          <div className='col-25'>
+            <label>Answer</label>
+          </div>
+          <div className='col-75'>
+            <span className='answer'>{answer}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  function Footer () {
+    return (
+      <div className='bar-60-down'>
+        <p className='desc'>Kelompok 5</p>
+      </div>
+    )
+  }
+
+  function getQuestion (val) {
+    setQuestion(val.target.value);
+    console.warn('question: ', val.target.value);
+  }
+
+  function getContext (val) {
+    setContext(val.target.value);
+    console.warn('context:  ',val.target.value);
+  }
+
+  function getAnswer () { 
+
+    if (question == null || context == null) {
+      setAnswer('Tidak ada question atau context')
+      setPost(false)
+    } else if (question === '' || context === '') {
+      setAnswer('Tidak ada question atau context')
+      setPost(false)
+    } 
+  }
+  
+  React.useEffect(function () {
+    getAnswer();
+  });
+
+  function getPost() {
+    
+    console.log('question value : ', question)
+    console.log('context value : ', context)
+
+    if (question == null || context == null) {
+      setPost(false)
+      setAnswer('Tidak ada question atau context')
+      alert(answer)
+    } else if (question === '' || context === '') {
+      setPost(false)
+      setAnswer('Tidak ada question atau context')
+      alert(answer)
+    } else {
+      setAnswer('ada jawaban')
+      setPost(true)
+    }
+  }
+
 
   function Mouse() {
     return (
       <div className='mouse_scroll'>
         <div className='mouse'>
-          <div className='wheel'></div>
+          <div className='wheel'/>
         </div>
         <div>
           <span className='m_scroll_arrows one'></span>
-          <span className='m_scroll_arrows one'></span>
-          <span className='m_scroll_arrows one'></span>
+          <span className='m_scroll_arrows two'></span>
+          <span className='m_scroll_arrows three'></span>
         </div>
       </div>
     );
@@ -37,46 +145,70 @@ function App() {
 
   return (
     <div className='App'>
+    <span>
+      <Header className='bar-80'/>
+    </span>
       <div className='container'>
-        <h1 className='heading-1'>Halo Kontol</h1>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+        <h1 className='heading-1'>Selamat Datang!<br/></h1>
+        <DescContent/>
         <Mouse />
       </div>
 
       <div className='container reveal'>
-        <h1 className='heading-1'>Let's goo</h1>
-        <div className='row'>
-          <div className='col-25'>
-            <label>Question</label>
+        <div className='content'>
+          <h1 className='heading-1'>Ayo tanyakan!</h1>
+          <DescJudul/>  
+
+          {/* INPUT QUESTION */}
+          <div className='row'>
+            <div className='col-25'>
+              <label>Question</label>
+            </div>
+            <div className='col-75'>
+              <input 
+                ref={inputQ}
+                type='text' 
+                id="question-box" 
+                name="question-box" 
+                placeholder='Type here...' 
+                onChange={getQuestion}>
+              </input>
+            </div>
           </div>
-          <div className='col-75'>
-            <input type='text' id="question-box" name="question-box" placeholder='Type here...'/>
+
+          {/* INPUT CONTEXT */}
+          <div className='row'>
+            <div className='col-25'>
+              <label>Context</label>
+            </div>
+            <div className='col-75'>
+              <textarea 
+                ref={inputC}
+                id='context-box' 
+                name='context-box' 
+                placeholder='Write something...' 
+                onChange={getContext}>
+              </textarea>
+            </div>
           </div>
-        </div>
-        <div className='row'>
-          <div className='col-25'>
-            <label>Context</label>
+
+          {/* SUBMIT BUTTON */}
+          <div className='row'>
+            <button 
+              type='submit' 
+              onClick={getPost}>
+                Submit
+            </button>
           </div>
-          <div className='col-75'>
-            <textarea id='context-box' name='context-box' placeholder='Write something...'/>
-          </div>
-        </div>
-        <div className='row'>
-          <input type='submit' value='Submit'/>
-        </div>
+
         </div>
         {
           post?
           <Print className='container'/>
           :null
-        };
+        }
       </div>
+      <Footer/>
     </div>
   );
 }
