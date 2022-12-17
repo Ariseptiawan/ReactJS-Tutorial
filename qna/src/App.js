@@ -17,9 +17,9 @@ function App() {
         <div className='row'>
           <p className='title'>Kelompok 5</p>
           <div className='button-menu'>
-            <button className='header-menu'>Button1</button>
-            <button className='header-menu'>Button2</button>
-            <button className='header-menu'>Button3</button>
+            <button className='header-menu'>About</button>
+            <button className='header-menu'>GitHub</button>
+            <button className='header-menu'>Google</button>
           </div>
         </div>
       </div>
@@ -29,7 +29,8 @@ function App() {
   function DescJudul(){
     return (
       <p className='desc'>
-        Deskripsi judul ditulis disini...
+        {/* Deskripsi judul ditulis disini... */}
+        Ini adalah sebuah website Question & Answering yang kami buat untuk memenuhi tugas UAS dari matakuliah Pemrosesan Bahasa Alami.
       </p>
     );
   }
@@ -37,7 +38,8 @@ function App() {
   function DescContent(){
     return (
       <p className='desc'>
-        Deskripsi content ditulis disini...
+      {/* Deskripsi Content ditulis disini... */}
+        Tulis pertanyaan yang ingin kamu tanyakan pada kolom Question dan isi konteks sebagai acuan dari pertanyaan yang ingin kamu cari jawabannya pada kolom Context.
       </p>
     );
   }
@@ -150,14 +152,14 @@ function App() {
     </span>
       <div className='container'>
         <h1 className='heading-1'>Selamat Datang!<br/></h1>
-        <DescContent/>
+        <DescJudul/>
         <Mouse />
       </div>
 
       <div className='container reveal'>
         <div className='content'>
           <h1 className='heading-1'>Ayo tanyakan!</h1>
-          <DescJudul/>  
+          <DescContent/>  
 
           {/* INPUT QUESTION */}
           <div className='row'>
