@@ -30,7 +30,7 @@ function App() {
     return (
       <p className='desc'>
         {/* Deskripsi judul ditulis disini... */}
-        Ini adalah sebuah website Question & Answering yang kami buat untuk memenuhi tugas UAS dari matakuliah Pemrosesan Bahasa Alami.
+        Ini adalah sebuah website Question & Answering yang kami buat untuk memenuhi tugas UAS dari matakuliah Pemrosesan Bahasa Alami. p
       </p>
     );
   }
